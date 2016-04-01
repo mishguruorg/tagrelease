@@ -1,6 +1,6 @@
 {
   "name": "tagrelease",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Tags a commit using the version found in package.json",
   "main": "dist/index.js",
   "scripts": {
