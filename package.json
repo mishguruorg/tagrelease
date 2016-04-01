@@ -8,6 +8,9 @@
     "prepublish": "rm -rf dist && babel --optional runtime lib --out-dir dist --copy-files",
     "postpublish": "rm -rf dist"
   },
+  "bin": {
+    "tagrelease": "dist/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mishguruorg/tagrelease"
@@ -40,8 +43,8 @@
     "babel-runtime": "^6.6.1",
     "bluebird": "^3.3.4",
     "minimist": "^1.2.0",
-    "nodegit": "^0.12.1",
-    "ramda": "^0.20.1"
+    "ramda": "^0.20.1",
+    "simple-git": "^1.31.0"
   },
   "standard": {
     "ignore": [
