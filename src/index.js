@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-require('babel-polyfill')
 
 import minimist from 'minimist'
 import { map } from 'ramda'

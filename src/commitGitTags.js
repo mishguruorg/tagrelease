@@ -1,5 +1,4 @@
 import git from 'simple-git'
-import Promise from 'bluebird'
 import { reduce } from 'ramda'
 
 const commitGitTags = async (directory, tags, remote, branch) => {

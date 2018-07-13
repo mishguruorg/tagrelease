@@ -1,5 +1,4 @@
 import { readFile } from 'fs'
-import Promise from 'bluebird'
 
 const getVersion = async (directory) => {
   const pkg = await getPackageJson(directory)
