@@ -1,40 +1,37 @@
 import git from 'simple-git/promise'
-import { reduce } from 'ramda'
+import { map } from 'ramda'
 
-const commitGitTagsAndBranch = async (directory, tags, remote, branch) => {
-  const updatedRepo = addTags(directory, tags)
+const commitGitTagsAndBranch = async (directory, tags, remote) => {
+  await addTags(directory, tags)
   if (remote && branch) {
-    return await pushRepo(updatedRepo, remote, branch)
+    return await pushRepo(directory, remote)
   }
 }
 
-const addTags = (directory, tags) => {
-  console.log(`Creating new tags ${tags.join(' ')}`)
+const addTags = async (directory, tags) => {
   const repo = git(directory)
-  const updatedRepo = reduce((taggedRepo, tag) => taggedRepo.addTag(tag), repo, tags)
-  return updatedRepo
-}
 
-const getCurrentBranch = async (directory) => {
-  return await git(directory).revparse(['--abbrev-ref', 'HEAD'])
+  await Promise.all(tags.map(async (tag) => {
+    console.log(`Creating new tag ${tag}`)
+    await repo.addTag(tag)
+  }))
 }
 
 const getCurrentHash = async (directory) => {
   return await git(directory).revparse(['HEAD'])
 }
 
-const pushRepo = async (repo, remote, branch) => {
-  console.log(`Pushing repo to ${remote} ${branch}`)
-  return repo
-    .push(remote, branch)
-    .pushTags(remote)
+const pushRepo = async (directory, remote) => {
+  console.log(`Pushing repo to ${remote}`)
+  const repo = git(directory)
+
+  await repo.pushTags(remote)
 }
 
 export {
   commitGitTagsAndBranch,
   addTags,
   pushRepo,
-  getCurrentHash,
-  getCurrentBranch
+  getCurrentHash
 }
 
