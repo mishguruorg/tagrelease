@@ -28,7 +28,7 @@ const tagRelease = async () => {
   const tags = map(env => `${env}-${currentHash}`.trim(), environments)
   const updatedRepo = await addTags(directory, tags)
   if (push) {
-    await pushRepo(directory, updatedRepo, remote)
+    await pushRepo(directory, remote)
   }
 
   console.log('done!')
